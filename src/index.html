@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мини-Мапл</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            margin: 5px 0;
+            width: 100%;
+            padding: 10px;
+        }
+        #result {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Мини-Мапл</h1>
+    <input type="text" id="expression" placeholder="Введите полином" />
+    <input type="text" id="variable" placeholder="Введите переменную" />
+    <button id="calculateBtn">Вычислить</button>
+    <div id="result"></div>
+
+    <!-- Подключаем файл с классом MiniMaple -->
+    <script src="miniMaple.js"></script>
+    <script>
+        document.getElementById('calculateBtn').addEventListener('click', () => {
+            const expression = document.getElementById('expression').value;
+            const variable = document.getElementById('variable').value;
+            const resultDiv = document.getElementById('result');
+
+            try {
+                const miniMaple = new MiniMaple();
+                const result = miniMaple.diff(expression, variable);
+                resultDiv.textContent = `Результат: ${result}`;
+            } catch (error) {
+                resultDiv.textContent = `Ошибка: ${error}`;
+            }
+        });
+    </script>
+</body>
+</html>
