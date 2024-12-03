@@ -1,8 +1,9 @@
-import {_miniMapl} from "../src/miniMaple";
+import { MiniMaple } from "../src/miniMaple";
+const _miniMapl = new MiniMaple();
 
 
 test('Valid operation + - * ^', () => {
-    const diff1 = _miniMapl.diff('4*x^3', 'x')
+    const diff1 = _miniMapl.diff('4*x^3 + 4', 'x')
     const diff2 = _miniMapl.diff('4*x^3', 'y')
     const diff3 = _miniMapl.diff('4*x^3 - x^2', 'x')
     const diff4 = _miniMapl.diff('4*x^2 + 5', 'x')
@@ -21,8 +22,20 @@ test('Valid operation + - * ^', () => {
 })
 
 test('Not valid operation throw errors', () => {
-    expect(() => _miniMapl.diff('x / y', 'x').toThrow('Invalid operation'))
     expect(() => _miniMapl.diff('x * cos(y)', 'x').toThrow('Invalid operation'))
+})
+
+
+test('Not valid operation throw errors1', () => {
+    expect(() => _miniMapl.diff('x (y)f', 'x').toThrow('Invalid operation'))
+})
+
+test('Not valid operation throw errors2', () => {
+    expect(() => _miniMapl.diff('x / y', 'x').toThrow('Invalid operation'))
+})
+
+test('regular expression in return false', () =>  {
+    expect(_miniMapl.isValidExpression('/')).toBe(false)
 })
 
 

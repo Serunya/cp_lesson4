@@ -5,8 +5,7 @@ class MiniMaple {
             throw ('Invalid operation');
     
         const variableRegex = new RegExp(`(-?\\d*)\\*?${variable}\\^?(\\d*)`);
-        const terms = expression.split(/\s*([\+\-])\s*/).filter(term => term);
-    
+        const terms = expression.split(/(?=[+-])|\s+/).filter(term => term);
         const deriveTerm = (term) => {
             const match = term.match(variableRegex);
             if (!match) {
@@ -56,7 +55,6 @@ class MiniMaple {
         return validRegex.test(expression)
     }
 }
-
 
 
 window.MiniMaple = MiniMaple;
